@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap Certifications 2026 - Checklist Interactive</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: #333; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; overflow-x: hidden; }
+        .intro-banner { background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-left: 5px solid #70AD47; }
+        .intro-banner h2 { color: #2c3e50; margin-bottom: 1rem; }
+        .intro-banner p { color: #555; line-height: 1.6; margin-bottom: 0.5rem; }
+        .cert-buttons { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; overflow-x: auto; padding-bottom: 0.5rem; }
+        .cert-btn { padding: 12px 18px; border: 2px solid #ecf0f1; background: white; cursor: pointer; border-radius: 8px; font-weight: 600; font-size: 13px; transition: all 0.3s; white-space: nowrap; flex-shrink: 0; }
+        .cert-btn.active { background: #4472C4; color: white; border-color: #4472C4; box-shadow: 0 4px 12px rgba(68,114,196,0.3); }
+        .cert-btn:hover { border-color: #4472C4; color: #4472C4; }
+        .content { display: none; }
+        .content.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        header { text-align: center; padding: 2rem; background: white; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { font-size: 28px; margin-bottom: 0.5rem; color: #2c3e50; }
+        .subtitle { color: #7f8c8d; margin-bottom: 0.5rem; }
+        .meta { color: #95a5a6; font-style: italic; }
+        .section { background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow-x: hidden; }
+        h2 { font-size: 22px; margin-bottom: 1.5rem; border-bottom: 3px solid #4472C4; padding-bottom: 0.5rem; word-wrap: break-word; }
+        .overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-card { background: #f8f9fa; border-left: 5px solid #4472C4; padding: 1.5rem; border-radius: 8px; }
+        .stat-number { font-size: 24px; font-weight: 700; color: #4472C4; }
+        .stat-label { font-size: 13px; color: #7f8c8d; margin-top: 0.5rem; line-height: 1.5; }
+        .week { background: #f8f9fa; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #4472C4; }
+        .week-header { background: linear-gradient(135deg, #4472C4 0%, #3d5fa3 100%); color: white; padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; user-select: none; }
+        .week-content { padding: 1.5rem; display: none; }
+        .week.active .week-content { display: block; }
+        .chevron { transition: transform 0.3s; }
+        .week.active .chevron { transform: rotate(180deg); }
+        .week-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+        .week-item { font-size: 14px; padding: 1rem; background: white; border-radius: 6px; border-left: 3px solid #70AD47; }
+        .week-item strong { color: #70AD47; }
+        
+        /* Progress cards */
+        .progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .week-progress-card { background: #f8f9fa; border-radius: 8px; padding: 1.5rem; }
+        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .progress-header h4 { margin: 0; color: #2c3e50; font-size: 15px; }
+        .progress-percentage { font-weight: 700; color: #4472C4; font-size: 18px; }
+        .progress-bar { background: #ddd; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
+        .progress-fill { background: linear-gradient(90deg, #4472C4 0%, #70AD47 100%); height: 100%; width: 0%; transition: width 0.3s; }
+        .progress-items { display: flex; flex-direction: column; gap: 0.5rem; }
+        .progress-item { display: flex; align-items: center; font-size: 13px; cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: all 0.2s; }
+        .progress-item:hover { background: white; }
+        .progress-item input { margin-right: 0.75rem; cursor: pointer; width: 16px; height: 16px; }
+        .progress-item span { flex: 1; }
+        
+        /* Global progress */
+        .global-progress { background: #e8f5e9; border-left: 4px solid #70AD47; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; }
+        .global-progress h4 { margin-top: 0; color: #2e7d32; margin-bottom: 1rem; }
+        .global-progress .progress-bar { height: 12px; }
+        .global-progress p { margin-top: 1rem; margin-bottom: 0; color: #2e7d32; font-weight: 600; }
+        
+        /* Checklist */
+        .checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .checklist-domain { background: #f8f9fa; border-radius: 8px; padding: 1.5rem; }
+        .checklist-domain h4 { color: #4472C4; margin-bottom: 1rem; font-size: 15px; }
+        .checklist-item { display: flex; align-items: center; padding: 0.75rem; cursor: pointer; border-radius: 4px; transition: all 0.2s; margin-bottom: 0.5rem; }
+        .checklist-item:hover { background: white; }
+        .checklist-item input { margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer; }
+        .checklist-item.checked { background: #e8f5e9; color: #2e7d32; }
+        .checklist-item.checked input { accent-color: #70AD47; }
+        
+        /* Tabs */
+        .tab-buttons { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; border-bottom: 2px solid #ecf0f1; overflow-x: auto; padding-bottom: 0.5rem; }
+        .tab-btn { padding: 0.75rem 1.5rem; background: transparent; border: none; cursor: pointer; font-weight: 600; color: #7f8c8d; border-bottom: 3px solid transparent; transition: all 0.3s; white-space: nowrap; flex-shrink: 0; }
+        .tab-btn.active { color: #4472C4; border-bottom-color: #4472C4; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* Resources */
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+        .resource-card { background: #f8f9fa; padding: 1.5rem; border-left: 4px solid #4472C4; border-radius: 8px; }
+        .resource-title { font-weight: 600; color: #4472C4; margin-bottom: 0.5rem; }
+        .resource-link { font-size: 13px; color: #7f8c8d; margin-bottom: 0.75rem; }
+        .resource-desc { font-size: 14px; color: #555; line-height: 1.5; }
+        
+        .order-badge { display: inline-block; background: #4472C4; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 700; margin-right: 1rem; margin-bottom: 1rem; }
+        
+        footer { text-align: center; padding: 2rem; background: white; border-radius: 12px; margin-top: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        footer p { margin: 0.5rem 0; color: #7f8c8d; }
+        
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 1024px) {
+            .container { padding: 1.5rem; }
+            .cert-buttons { gap: 0.5rem; }
+            .cert-btn { padding: 10px 14px; font-size: 12px; }
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .intro-banner { padding: 1.5rem; margin-bottom: 1.5rem; }
+            .intro-banner h2 { font-size: 22px; margin-bottom: 0.75rem; }
+            .intro-banner p { font-size: 16px; }
+            
+            .cert-buttons { gap: 0.5rem; margin-bottom: 1.5rem; }
+            .cert-btn { padding: 8px 10px; font-size: 11px; border-radius: 6px; }
+            
+            header { padding: 1.5rem; margin-bottom: 1.5rem; }
+            h1 { font-size: 22px; }
+            .subtitle { font-size: 14px; }
+            .meta { font-size: 12px; }
+            
+            .section { padding: 1.5rem; margin-bottom: 1.5rem; }
+            h2 { font-size: 18px; margin-bottom: 1rem; }
+            
+            .overview { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+            .stat-card { padding: 1rem; }
+            .stat-number { font-size: 20px; }
+            .stat-label { font-size: 12px; }
+            
+            .week-header { padding: 1rem; font-size: 14px; }
+            .week-content { padding: 1rem; }
+            .week-items { grid-template-columns: 1fr; gap: 0.75rem; }
+            .week-item { font-size: 13px; padding: 0.75rem; }
+            
+            .progress-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .week-progress-card { padding: 1rem; }
+            .progress-header h4 { font-size: 14px; }
+            .progress-percentage { font-size: 16px; }
+            .progress-item { font-size: 12px; padding: 0.4rem; }
+            .progress-item input { width: 14px; height: 14px; }
+            
+            .global-progress { padding: 1rem; margin-bottom: 1.5rem; }
+            .global-progress h4 { margin-bottom: 0.75rem; font-size: 14px; }
+            .global-progress p { font-size: 13px; }
+            
+            .checklist { grid-template-columns: 1fr; gap: 1rem; }
+            .checklist-domain { padding: 1rem; }
+            .checklist-domain h4 { font-size: 13px; margin-bottom: 0.75rem; }
+            .checklist-item { font-size: 12px; padding: 0.5rem; }
+            .checklist-item input { width: 16px; height: 16px; }
+            
+            .tab-buttons { gap: 0.25rem; margin-bottom: 1rem; }
+            .tab-btn { padding: 0.5rem 1rem; font-size: 12px; }
+            
+            .resource-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+            .resource-card { padding: 1rem; }
+            .resource-title { font-size: 13px; }
+            .resource-link { font-size: 11px; }
+            .resource-desc { font-size: 12px; }
+            
+            .order-badge { padding: 0.4rem 0.75rem; font-size: 12px; margin-right: 0.5rem; }
+            
+            footer { padding: 1.5rem; margin-top: 1.5rem; }
+            footer p { font-size: 12px; }
+        }
+        
+        @media (max-width: 480px) {
+            .container { padding: 0.75rem; }
+            .intro-banner { padding: 1rem; margin-bottom: 1rem; }
+            .intro-banner h2 { font-size: 18px; margin-bottom: 0.5rem; }
+            .intro-banner p { font-size: 14px; line-height: 1.4; }
+            
+            .cert-buttons { gap: 0.3rem; margin-bottom: 1rem; }
+            .cert-btn { padding: 6px 8px; font-size: 10px; border-radius: 4px; margin-bottom: 0.3rem; }
+            
+            header { padding: 1rem; margin-bottom: 1rem; }
+            h1 { font-size: 18px; margin-bottom: 0.3rem; }
+            .subtitle { font-size: 12px; margin-bottom: 0.3rem; }
+            .meta { font-size: 11px; }
+            
+            .section { padding: 1rem; margin-bottom: 1rem; }
+            h2 { font-size: 16px; margin-bottom: 0.75rem; padding-bottom: 0.4rem; }
+            
+            .overview { grid-template-columns: 1fr; gap: 0.75rem; }
+            .stat-card { padding: 0.75rem; border-radius: 6px; }
+            .stat-number { font-size: 18px; }
+            .stat-label { font-size: 11px; margin-top: 0.3rem; }
+            
+            .week-header { padding: 0.75rem; font-size: 13px; }
+            .week-content { padding: 0.75rem; }
+            .week-items { grid-template-columns: 1fr; gap: 0.5rem; }
+            .week-item { font-size: 12px; padding: 0.5rem; }
+            
+            .progress-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+            .week-progress-card { padding: 0.75rem; border-radius: 6px; }
+            .progress-header { margin-bottom: 0.75rem; }
+            .progress-header h4 { font-size: 12px; }
+            .progress-percentage { font-size: 14px; }
+            .progress-bar { height: 6px; margin-bottom: 0.75rem; }
+            .progress-item { font-size: 11px; padding: 0.3rem; }
+            .progress-item input { width: 13px; height: 13px; margin-right: 0.5rem; }
+            
+            .global-progress { padding: 0.75rem; margin-bottom: 1rem; }
+            .global-progress h4 { margin-bottom: 0.5rem; font-size: 12px; }
+            .global-progress .progress-bar { height: 10px; }
+            .global-progress p { margin-top: 0.75rem; font-size: 12px; }
+            
+            .checklist { grid-template-columns: 1fr; gap: 0.75rem; }
+            .checklist-domain { padding: 0.75rem; border-radius: 6px; }
+            .checklist-domain h4 { font-size: 12px; margin-bottom: 0.5rem; }
+            .checklist-item { font-size: 11px; padding: 0.4rem; margin-bottom: 0.3rem; }
+            .checklist-item input { width: 14px; height: 14px; margin-right: 0.4rem; }
+            
+            .tab-buttons { gap: 0.2rem; margin-bottom: 0.75rem; border-bottom: 1px solid #ecf0f1; }
+            .tab-btn { padding: 0.4rem 0.75rem; font-size: 10px; }
+            
+            .resource-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+            .resource-card { padding: 0.75rem; border-radius: 6px; }
+            .resource-title { font-size: 12px; margin-bottom: 0.3rem; }
+            .resource-link { font-size: 10px; margin-bottom: 0.3rem; }
+            .resource-desc { font-size: 11px; line-height: 1.4; }
+            
+            .order-badge { padding: 0.3rem 0.6rem; font-size: 10px; margin-right: 0.3rem; margin-bottom: 0.5rem; }
+            
+            footer { padding: 1rem; margin-top: 1rem; border-radius: 8px; }
+            footer p { font-size: 10px; margin: 0.3rem 0; }
+        }
+        
+        /* Additional mobile fixes for specific elements */
+        @media (max-width: 480px) {
+            .week-header span:first-child { word-break: break-word; }
+            
+            .checklist-item span { word-break: break-word; }
+            
+            /* Fix pour les grids inline */
+            div[style*="grid-template-columns"] { 
+                grid-template-columns: 1fr !important;
+                gap: 0.75rem !important;
+            }
+            
+            div[style*="grid"] h4 {
+                font-size: 13px !important;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            div[style*="grid"] ul {
+                font-size: 12px !important;
+                line-height: 1.6 !important;
+            }
+            
+            div[style*="grid"] li {
+                margin-bottom: 0.4rem !important;
+            }
+            
+            /* Ensure buttons don't overflow */
+            button { max-width: 100%; word-break: break-word; }
+        }
+        
+        @media (max-width: 600px) {
+            /* Make week headers scrollable if text is too long */
+            .week-header {
+                flex-wrap: wrap;
+            }
+            
+            .week-header span:last-child {
+                order: -1;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="intro-banner">
+        <h2>🎯 Roadmap Certifications 2026</h2>
+        <p style="font-size: 18px; font-style: italic; color: #4472C4; font-weight: 600; margin-bottom: 1.5rem;">
+            "La sécurité informatique n'est pas un destin, c'est un choix. Choisissez l'excellence - Étape par étape, certificat par certificat, vers l'expertise absolue." 🚀
+        </p>
+    </div>
+
+
+    <div class="cert-buttons">
+        <button class="cert-btn active" onclick="showCert(event, 'az900')">1️⃣ AZ-900</button>
+        <button class="cert-btn" onclick="showCert(event, 'security')">2️⃣ Security+</button>
+        <button class="cert-btn" onclick="showCert(event, 'cysa')">3️⃣ CySA+</button>
+        <button class="cert-btn" onclick="showCert(event, 'sscp')">4️⃣ SSCP</button>
+        <button class="cert-btn" onclick="showCert(event, 'sc200')">5️⃣ SC-200</button>
+        <button class="cert-btn" onclick="showCert(event, 'sc401')">6️⃣ SC-401</button>
+        <button class="cert-btn" onclick="showCert(event, 'itil')">7️⃣ ITIL</button>
+        <button class="cert-btn" onclick="showCert(event, 'cisa')">8️⃣ CISA</button>
+        <button class="cert-btn" onclick="showCert(event, 'cissp')">9️⃣ CISSP</button>
+    </div>
+
+    <!-- AZ-900 -->
+    <div id="az900" class="content active">
+        <header>
+            <div class="order-badge">ÉTAPE 1/9</div>
+            <h1>☁️ AZ-900 (Microsoft Azure Fundamentals)</h1>
+            <p class="subtitle">Point de départ idéal - Cloud basics</p>
+            <p class="meta">4 semaines • Débutant • GRATUIT • Microsoft Cloud</p>
+            <div style="background: #e3f2fd; border-left: 4px solid #4472C4; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <p style="color: #1565c0; font-style: italic; font-weight: 600; margin: 0; margin-bottom: 0.75rem;">💡 "Chaque expert était d'abord un débutant. Votre première marche vers le cloud commence aujourd'hui!"</p>
+                <p style="color: #1565c0; font-style: italic; font-weight: 600; margin: 0;">💡 "Azure est le futur du cloud d'entreprise. Soyez parmi les premiers à le maîtriser."</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">📚 Domaines Couverts</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Cloud concepts & services</li>
+                        <li>✓ Azure compute, storage, networking</li>
+                        <li>✓ Management & governance</li>
+                        <li>✓ Security & compliance basics</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💼 Postes Possibles</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Cloud Support Associate</li>
+                        <li>✓ Junior Azure Administrator</li>
+                        <li>✓ Cloud Operations Technician</li>
+                        <li>✓ Support Infrastructure Azure</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💰 Salaires au Québec</h4>
+                    <p style="color: #4472C4; font-weight: 700; font-size: 16px; margin: 0.5rem 0;">$55,000 - $75,000 CAD</p>
+                    <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Niveau: Junior • Expérience: 0-2 ans</p>
+                </div>
+            </div>
+        </header>
+        <div class="section">
+            <h2>📋 Plan d'Étude</h2>
+            <div class="overview">
+                <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">Domaines clés</div></div>
+                <div class="stat-card"><div class="stat-number">20h</div><div class="stat-label">Recommandé/semaine</div></div>
+                <div class="stat-card"><div class="stat-number">≥70%</div><div class="stat-label">Score minimum</div></div>
+                <div class="stat-card"><div class="stat-number">GRATUIT</div><div class="stat-label">Examen + $200 crédit</div></div>
+            </div>
+            <div class="week active">
+                <div class="week-header">
+                    <span>Semaine 1: Cloud Concepts & Services</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="week-content">
+                    <div class="week-items">
+                        <div class="week-item"><strong>8h</strong> Cloud computing concepts</div>
+                        <div class="week-item"><strong>8h</strong> Azure services (Compute, Storage, Network)</div>
+                        <div class="week-item"><strong>4h</strong> Exercices & quiz</div>
+                    </div>
+                </div>
+            </div>
+            <div class="week">
+                <div class="week-header">
+                    <span>Semaine 2: Azure Architecture & Services</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="week-content">
+                    <div class="week-items">
+                        <div class="week-item"><strong>8h</strong> VMs, App Services, Databases</div>
+                        <div class="week-item"><strong>8h</strong> Infrastructure & scalability</div>
+                        <div class="week-item"><strong>4h</strong> Pratique interactive</div>
+                    </div>
+                </div>
+            </div>
+            <div class="week">
+                <div class="week-header">
+                    <span>Semaine 3-4: Management & Security + Examen</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="week-content">
+                    <div class="week-items">
+                        <div class="week-item"><strong>8h</strong> Azure management & governance</div>
+                        <div class="week-item"><strong>8h</strong> Security, compliance & privacy</div>
+                        <div class="week-item"><strong>8h</strong> Examens blancs + examen final</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Suivi de Progression AZ-900</h2>
+            <div class="progress-grid">
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S1: Concepts Cloud</h4>
+                        <span class="progress-percentage" id="az900w1-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="az900w1-fill" style="width: 0%"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('az900', 1, this)"><input type="checkbox" class="week-check az900w1-check"><span>Cloud concepts</span></label>
+                        <label class="progress-item" onclick="trackWeek('az900', 1, this)"><input type="checkbox" class="week-check az900w1-check"><span>Azure services</span></label>
+                        <label class="progress-item" onclick="trackWeek('az900', 1, this)"><input type="checkbox" class="week-check az900w1-check"><span>Exercices ≥70%</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S2: Architecture</h4>
+                        <span class="progress-percentage" id="az900w2-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="az900w2-fill" style="width: 0%"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('az900', 2, this)"><input type="checkbox" class="week-check az900w2-check"><span>VMs & Services</span></label>
+                        <label class="progress-item" onclick="trackWeek('az900', 2, this)"><input type="checkbox" class="week-check az900w2-check"><span>Infrastructure</span></label>
+                        <label class="progress-item" onclick="trackWeek('az900', 2, this)"><input type="checkbox" class="week-check az900w2-check"><span>Pratique complète</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S3-4: Exam</h4>
+                        <span class="progress-percentage" id="az900w3-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="az900w3-fill" style="width: 0%"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('az900', 3, this)"><input type="checkbox" class="week-check az900w3-check"><span>Management</span></label>
+                        <label class="progress-item" onclick="trackWeek('az900', 3, this)"><input type="checkbox" class="week-check az900w3-check"><span>Security</span></label>
+                        <label class="progress-item" onclick="trackWeek('az900', 3, this)"><input type="checkbox" class="week-check az900w3-check"><span>Examen ≥70%</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="global-progress">
+                <h4>📈 Progression globale AZ-900</h4>
+                <div class="progress-bar"><div class="progress-fill" id="az900-global-fill" style="width: 0%; background: linear-gradient(90deg, #70AD47 0%, #4472C4 100%);"></div></div>
+                <p><span id="az900-global-count">0</span> / <span id="az900-global-total">9</span> items (<span id="az900-global-percent">0%</span>)</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>✅ Checklist Domaines AZ-900</h2>
+            <div class="checklist">
+                <div class="checklist-domain">
+                    <h4>1. Cloud Concepts (20%)</h4>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Cloud benefits</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Cloud models (Public, Private, Hybrid)</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Cloud services (IaaS, PaaS, SaaS)</span></label>
+                </div>
+                <div class="checklist-domain">
+                    <h4>2. Azure Services (50%)</h4>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Compute services</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Storage services</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Networking services</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Databases & Analytics</span></label>
+                </div>
+                <div class="checklist-domain">
+                    <h4>3. Management & Security (30%)</h4>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Azure management tools</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Security & compliance</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Azure pricing</span></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Ressources AZ-900</h2>
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(this, 'az900-cours')">Cours</button>
+                <button class="tab-btn" onclick="switchTab(this, 'az900-pratique')">Pratique</button>
+                <button class="tab-btn" onclick="switchTab(this, 'az900-ressources')">Ressources</button>
+                <button class="tab-btn" onclick="switchTab(this, 'az900-labs')">🔗 Labs GitHub</button>
+            </div>
+            <div class="tab-content active" id="az900-cours">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Microsoft Learn AZ-900</div><div class="resource-link">microsoft.com/learn • GRATUIT</div><div class="resource-desc">Parcours officiel Microsoft</div></div>
+                    <div class="resource-card"><div class="resource-title">Udemy AZ-900</div><div class="resource-link">udemy.com • ~$15</div><div class="resource-desc">Cours complets avec labs</div></div>
+                    <div class="resource-card"><div class="resource-title">YouTube Azure Basics</div><div class="resource-link">youtube.com • GRATUIT</div><div class="resource-desc">Vidéos explications courtes</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="az900-pratique">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">AZ-900 Exam Practice</div><div class="resource-link">microsoft.com • GRATUIT</div><div class="resource-desc">Questions officielles Microsoft</div></div>
+                    <div class="resource-card"><div class="resource-title">Azure Free Trial</div><div class="resource-link">azure.microsoft.com • GRATUIT 12m</div><div class="resource-desc">$200 crédit + services gratuits</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="az900-ressources">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Azure Documentation</div><div class="resource-link">docs.microsoft.com • GRATUIT</div><div class="resource-desc">Documentation officielle complète</div></div>
+                    <div class="resource-card"><div class="resource-title">Microsoft Learn Sandbox</div><div class="resource-link">microsoft.com/learn • GRATUIT</div><div class="resource-desc">Environnement pratique gratuit</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="az900-labs">
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 AZ-900 Microsoft Learning</div>
+                        <div class="resource-link">github.com/MicrosoftLearning</div>
+                        <div class="resource-desc">Labs et exercices officiels Microsoft</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Azure Quickstart Templates</div>
+                        <div class="resource-link">github.com/Azure/azure-quickstart-templates</div>
+                        <div class="resource-desc">Templates infrastructure Azure prêts</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Azure Mastery</div>
+                        <div class="resource-link">github.com/johnthebrit/AzureMastery</div>
+                        <div class="resource-desc">Labs progressifs et détaillés Azure</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECURITY+ -->
+    <div id="security" class="content">
+        <header>
+            <div class="order-badge">ÉTAPE 2/9</div>
+            <h1>🔐 CompTIA Security+ 701</h1>
+            <p class="subtitle">Fondamentaux sécurité essentiels</p>
+            <p class="meta">5-6 semaines • Débutant-Intermédiaire</p>
+            <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <p style="color: #e65100; font-style: italic; font-weight: 600; margin: 0; margin-bottom: 0.75rem;">💡 "La sécurité est le fondement. Maîtrisez les bases avant d'être un expert reconnu."</p>
+                <p style="color: #e65100; font-style: italic; font-weight: 600; margin: 0;">💡 "Security+ ouvre 1000 portes. Franchissez celle qui vous intéresse le plus."</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">📚 Domaines Couverts</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Threats & Vulnerabilities (24%)</li>
+                        <li>✓ Architecture & Implementation (21%)</li>
+                        <li>✓ Implementation (25%)</li>
+                        <li>✓ Operations & Management (16%)</li>
+                        <li>✓ Governance, Risk & Compliance (14%)</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💼 Postes Possibles</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Junior Security Analyst</li>
+                        <li>✓ Security Operations Technician</li>
+                        <li>✓ IT Security Specialist</li>
+                        <li>✓ Systems Security Administrator</li>
+                        <li>✓ Network Security Technician</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💰 Salaires au Québec</h4>
+                    <p style="color: #4472C4; font-weight: 700; font-size: 16px; margin: 0.5rem 0;">$60,000 - $85,000 CAD</p>
+                    <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Niveau: Junior-Intermédiaire • Expérience: 0-3 ans</p>
+                </div>
+            </div>
+        </header>
+        <div class="section">
+            <h2>📋 Plan d'Étude</h2>
+            <div class="overview">
+                <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">Domaines majeurs</div></div>
+                <div class="stat-card"><div class="stat-number">23h</div><div class="stat-label">Disponible/semaine</div></div>
+                <div class="stat-card"><div class="stat-number">≥80%</div><div class="stat-label">Score minimum</div></div>
+                <div class="stat-card"><div class="stat-number">$70-90K</div><div class="stat-label">Salaire moyen</div></div>
+            </div>
+            <div class="week active">
+                <div class="week-header">
+                    <span>S1-2: Threats & Vulnerabilities (24%)</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="week-content">
+                    <div class="week-items">
+                        <div class="week-item"><strong>10h</strong> Attaques & malware</div>
+                        <div class="week-item"><strong>10h</strong> Vulnérabilités</div>
+                        <div class="week-item"><strong>6h</strong> Exercices & labs</div>
+                    </div>
+                </div>
+            </div>
+            <div class="week">
+                <div class="week-header">
+                    <span>S3-4: Architecture & Implementation (46%)</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="week-content">
+                    <div class="week-items">
+                        <div class="week-item"><strong>10h</strong> Modèles sécurité</div>
+                        <div class="week-item"><strong>10h</strong> Auth & encryption</div>
+                        <div class="week-item"><strong>8h</strong> Pratique intensive</div>
+                    </div>
+                </div>
+            </div>
+            <div class="week">
+                <div class="week-header">
+                    <span>S5-6: Operations & Exam (30%)</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="week-content">
+                    <div class="week-items">
+                        <div class="week-item"><strong>10h</strong> Security operations</div>
+                        <div class="week-item"><strong>8h</strong> Governance & compliance</div>
+                        <div class="week-item"><strong>8h</strong> Examen blanc & révision</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Suivi de Progression Security+</h2>
+            <div class="progress-grid">
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S1-2: Threats</h4>
+                        <span class="progress-percentage" id="secw1-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="secw1-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('security', 1, this)"><input type="checkbox" class="week-check secw1-check"><span>Attacks & Malware</span></label>
+                        <label class="progress-item" onclick="trackWeek('security', 1, this)"><input type="checkbox" class="week-check secw1-check"><span>Vulnerabilities</span></label>
+                        <label class="progress-item" onclick="trackWeek('security', 1, this)"><input type="checkbox" class="week-check secw1-check"><span>Labs ≥80%</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S3-4: Architecture</h4>
+                        <span class="progress-percentage" id="secw2-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="secw2-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('security', 2, this)"><input type="checkbox" class="week-check secw2-check"><span>Security Models</span></label>
+                        <label class="progress-item" onclick="trackWeek('security', 2, this)"><input type="checkbox" class="week-check secw2-check"><span>Authentication</span></label>
+                        <label class="progress-item" onclick="trackWeek('security', 2, this)"><input type="checkbox" class="week-check secw2-check"><span>Encryption</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S5-6: Operations</h4>
+                        <span class="progress-percentage" id="secw3-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="secw3-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('security', 3, this)"><input type="checkbox" class="week-check secw3-check"><span>Operations</span></label>
+                        <label class="progress-item" onclick="trackWeek('security', 3, this)"><input type="checkbox" class="week-check secw3-check"><span>GRC</span></label>
+                        <label class="progress-item" onclick="trackWeek('security', 3, this)"><input type="checkbox" class="week-check secw3-check"><span>Examen ≥80%</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="global-progress">
+                <h4>📈 Progression globale Security+</h4>
+                <div class="progress-bar"><div class="progress-fill" id="security-global-fill" style="width: 0%;"></div></div>
+                <p><span id="security-global-count">0</span> / <span id="security-global-total">9</span> items (<span id="security-global-percent">0%</span>)</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>✅ Checklist Domaines Security+</h2>
+            <div class="checklist">
+                <div class="checklist-domain">
+                    <h4>1. Threats (24%)</h4>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Threat types</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Malware & viruses</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Social engineering</span></label>
+                </div>
+                <div class="checklist-domain">
+                    <h4>2. Architecture (21%)</h4>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>CIA Triad</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Defense mechanisms</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Zero Trust</span></label>
+                </div>
+                <div class="checklist-domain">
+                    <h4>3. Implementation (25%)</h4>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Authentication</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Encryption</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><span>Access control</span></label>
+                </div>
+                <div class="checklist-domain">
+                    <h4>4-5. Ops & GRC (30%)</h4>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Security ops</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Compliance</span></label>
+                    <label class="checklist-item" onclick="toggleChecklist(this)"><input type="checkbox"><span>Risk management</span></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Ressources Security+</h2>
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(this, 'sec-cours')">Cours</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sec-pratique')">Pratique</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sec-ressources')">Ressources</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sec-labs')">🔗 Labs GitHub</button>
+            </div>
+            <div class="tab-content active" id="sec-cours">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Professor Messer</div><div class="resource-link">YouTube • GRATUIT</div><div class="resource-desc">Meilleur cours gratuit</div></div>
+                    <div class="resource-card"><div class="resource-title">CompTIA Guide</div><div class="resource-link">comptia.org • ~$60</div><div class="resource-desc">Guide officiel</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sec-pratique">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Boson Exams</div><div class="resource-link">boson.com • ~$150</div><div class="resource-desc">Très réalistes</div></div>
+                    <div class="resource-card"><div class="resource-title">ExamCompass</div><div class="resource-link">examcompass.com • GRATUIT</div><div class="resource-desc">Questions gratuites</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sec-ressources">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">TryHackMe</div><div class="resource-link">tryhackme.com • Premium</div><div class="resource-desc">Labs interactifs</div></div>
+                    <div class="resource-card"><div class="resource-title">HackTheBox</div><div class="resource-link">hackthebox.com • Gratuit+</div><div class="resource-desc">Challenges pratiques</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sec-labs">
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Professor Messer Security+</div>
+                        <div class="resource-link">github.com/professormesser/CompTIA-Security</div>
+                        <div class="resource-desc">Notes et resources du meilleur formateur</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Security+ Notes</div>
+                        <div class="resource-link">github.com/jamisin/comptia-security-plus-notes</div>
+                        <div class="resource-desc">Notes détaillées de révision</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Awesome Security+</div>
+                        <div class="resource-link">github.com/0xDarkKnight/awesome-security-plus</div>
+                        <div class="resource-desc">Collection complète de ressources</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CySA+ -->
+    <div id="cysa" class="content">
+        <header>
+            <div class="order-badge">ÉTAPE 3/9</div>
+            <h1>🔍 CompTIA CySA+ CS0-002</h1>
+            <p class="subtitle">Analyste sécurité opérationnel</p>
+            <p class="meta">6 semaines • Intermédiaire-Avancé</p>
+            <div style="background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <p style="color: #6a1b9a; font-style: italic; font-weight: 600; margin: 0; margin-bottom: 0.75rem;">💡 "La vraie sécurité se gagne sur le terrain. Devenez un opérateur de sécurité reconnu."</p>
+                <p style="color: #6a1b9a; font-style: italic; font-weight: 600; margin: 0;">💡 "CySA+ c'est où les vrais analystes font la différence. Rejoignez ce clan."</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">📚 Domaines Couverts</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Threat & Vulnerability Management (22%)</li>
+                        <li>✓ Security Operations (23%)</li>
+                        <li>✓ Incident Response (20%)</li>
+                        <li>✓ Compliance Management (15%)</li>
+                        <li>✓ Cloud & Infrastructure Security (20%)</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💼 Postes Possibles</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Security Operations Analyst</li>
+                        <li>✓ Threat Intelligence Analyst</li>
+                        <li>✓ Incident Response Specialist</li>
+                        <li>✓ SOC Analyst</li>
+                        <li>✓ Vulnerability Assessment Specialist</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💰 Salaires au Québec</h4>
+                    <p style="color: #4472C4; font-weight: 700; font-size: 16px; margin: 0.5rem 0;">$75,000 - $105,000 CAD</p>
+                    <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Niveau: Intermédiaire • Expérience: 2-5 ans</p>
+                </div>
+            </div>
+        </header>
+        <div class="section">
+            <h2>📋 Plan d'Étude (Simplifiée)</h2>
+            <div class="overview">
+                <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">Domaines</div></div>
+                <div class="stat-card"><div class="stat-number">25h</div><div class="stat-label">/semaine</div></div>
+                <div class="stat-card"><div class="stat-number">≥75%</div><div class="stat-label">Score min</div></div>
+                <div class="stat-card"><div class="stat-number">$90-120K</div><div class="stat-label">Salaire</div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Suivi Progression CySA+</h2>
+            <div class="progress-grid">
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S1-2: Threats</h4>
+                        <span class="progress-percentage" id="cysw1-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="cysw1-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('cysa', 1, this)"><input type="checkbox" class="week-check cysw1-check"><span>Threat analysis</span></label>
+                        <label class="progress-item" onclick="trackWeek('cysa', 1, this)"><input type="checkbox" class="week-check cysw1-check"><span>Vulnerability</span></label>
+                        <label class="progress-item" onclick="trackWeek('cysa', 1, this)"><input type="checkbox" class="week-check cysw1-check"><span>Risk mgmt</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S3-4: Operations</h4>
+                        <span class="progress-percentage" id="cysw2-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="cysw2-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('cysa', 2, this)"><input type="checkbox" class="week-check cysw2-check"><span>SIEM tools</span></label>
+                        <label class="progress-item" onclick="trackWeek('cysa', 2, this)"><input type="checkbox" class="week-check cysw2-check"><span>Monitoring</span></label>
+                        <label class="progress-item" onclick="trackWeek('cysa', 2, this)"><input type="checkbox" class="week-check cysw2-check"><span>Incident response</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S5-6: Final</h4>
+                        <span class="progress-percentage" id="cysw3-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="cysw3-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('cysa', 3, this)"><input type="checkbox" class="week-check cysw3-check"><span>Compliance</span></label>
+                        <label class="progress-item" onclick="trackWeek('cysa', 3, this)"><input type="checkbox" class="week-check cysw3-check"><span>Labs practiques</span></label>
+                        <label class="progress-item" onclick="trackWeek('cysa', 3, this)"><input type="checkbox" class="week-check cysw3-check"><span>Examen ≥75%</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="global-progress">
+                <h4>📈 Progression CySA+</h4>
+                <div class="progress-bar"><div class="progress-fill" id="cysa-global-fill"></div></div>
+                <p><span id="cysa-global-count">0</span> / <span id="cysa-global-total">9</span> (<span id="cysa-global-percent">0%</span>)</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Ressources CySA+</h2>
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(this, 'cysa-cours')">Cours</button>
+                <button class="tab-btn" onclick="switchTab(this, 'cysa-pratique')">Pratique</button>
+                <button class="tab-btn" onclick="switchTab(this, 'cysa-ressources')">Ressources</button>
+                <button class="tab-btn" onclick="switchTab(this, 'cysa-labs')">🔗 Labs GitHub</button>
+            </div>
+            <div class="tab-content active" id="cysa-cours">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Professor Messer CySA+</div><div class="resource-link">YouTube • GRATUIT</div><div class="resource-desc">Cours gratuit très structuré</div></div>
+                    <div class="resource-card"><div class="resource-title">Udemy CySA+</div><div class="resource-link">udemy.com • ~$15</div><div class="resource-desc">Cours complet à petit prix</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="cysa-pratique">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Boson CySA+ Exams</div><div class="resource-link">boson.com • ~$150</div><div class="resource-desc">Tests très réalistes</div></div>
+                    <div class="resource-card"><div class="resource-title">ExamCompass</div><div class="resource-link">examcompass.com • GRATUIT</div><div class="resource-desc">Questions gratuites</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="cysa-ressources">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">TryHackMe CySA Path</div><div class="resource-link">tryhackme.com • Premium</div><div class="resource-desc">Labs interactifs</div></div>
+                    <div class="resource-card"><div class="resource-title">HackTheBox</div><div class="resource-link">hackthebox.com • Gratuit+</div><div class="resource-desc">Challenges pratiques</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="cysa-labs">
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Awesome CySA+</div>
+                        <div class="resource-link">github.com/0xDarkKnight/awesome-cybersecurity-analyst</div>
+                        <div class="resource-desc">Collection complète de ressources CySA+</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Professor Messer CySA+</div>
+                        <div class="resource-link">github.com/professormesser/CompTIA-CySA</div>
+                        <div class="resource-desc">Notes du meilleur formateur</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 SecLists</div>
+                        <div class="resource-link">github.com/danielmiessler/SecLists</div>
+                        <div class="resource-desc">Wordlists, payloads et ressources</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SSCP -->
+    <div id="sscp" class="content">
+        <header>
+            <div class="order-badge">ÉTAPE 4/9</div>
+            <h1>🔒 SSCP (Systems Security Certified Practitioner)</h1>
+            <p class="subtitle">Expert Sécurité Systèmes - (ISC)²</p>
+            <p class="meta">6-8 semaines • Intermédiaire-Avancé • 1 an expérience</p>
+            <div style="background: #e0f2f1; border-left: 4px solid #009688; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <p style="color: #00695c; font-style: italic; font-weight: 600; margin: 0; margin-bottom: 0.75rem;">💡 "Les systèmes sécurisés ne se construisent pas par chance, mais par expertise. Soyez ce praticien."</p>
+                <p style="color: #00695c; font-style: italic; font-weight: 600; margin: 0;">💡 "SSCP est le pont vers CISSP. Chaque expert a commencé ici."</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">📚 Domaines Couverts</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Access Controls (15%)</li>
+                        <li>✓ Security Operations (15%)</li>
+                        <li>✓ Risk Identification & Analysis (15%)</li>
+                        <li>✓ Incident Response (15%)</li>
+                        <li>✓ Cryptography (15%)</li>
+                        <li>✓ Network Security (15%)</li>
+                        <li>✓ Systems Security (10%)</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💼 Postes Possibles</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Security Systems Administrator</li>
+                        <li>✓ Systems Security Engineer</li>
+                        <li>✓ Security Operations Manager</li>
+                        <li>✓ IT Security Consultant</li>
+                        <li>✓ Senior Security Analyst</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💰 Salaires au Québec</h4>
+                    <p style="color: #4472C4; font-weight: 700; font-size: 16px; margin: 0.5rem 0;">$80,000 - $120,000 CAD</p>
+                    <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Niveau: Intermédiaire-Avancé • Expérience: 3-6 ans</p>
+                </div>
+            </div>
+        </header>
+        <div class="section">
+            <h2>📋 Plan d'Étude</h2>
+            <div class="overview">
+                <div class="stat-card"><div class="stat-number">7</div><div class="stat-label">Domaines</div></div>
+                <div class="stat-card"><div class="stat-number">25h</div><div class="stat-label">/semaine</div></div>
+                <div class="stat-card"><div class="stat-number">≥70%</div><div class="stat-label">Score</div></div>
+                <div class="stat-card"><div class="stat-number">$95-125K</div><div class="stat-label">Salaire</div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Suivi Progression SSCP</h2>
+            <div class="progress-grid">
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S1-2: Access Control</h4>
+                        <span class="progress-percentage" id="sscpw1-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="sscpw1-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('sscp', 1, this)"><input type="checkbox" class="week-check sscpw1-check"><span>Authentication</span></label>
+                        <label class="progress-item" onclick="trackWeek('sscp', 1, this)"><input type="checkbox" class="week-check sscpw1-check"><span>Authorization</span></label>
+                        <label class="progress-item" onclick="trackWeek('sscp', 1, this)"><input type="checkbox" class="week-check sscpw1-check"><span>IAM concepts</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S3-4: Crypto & Network</h4>
+                        <span class="progress-percentage" id="sscpw2-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="sscpw2-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('sscp', 2, this)"><input type="checkbox" class="week-check sscpw2-check"><span>Cryptography</span></label>
+                        <label class="progress-item" onclick="trackWeek('sscp', 2, this)"><input type="checkbox" class="week-check sscpw2-check"><span>PKI</span></label>
+                        <label class="progress-item" onclick="trackWeek('sscp', 2, this)"><input type="checkbox" class="week-check sscpw2-check"><span>Network security</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S5-6: Ops & Incident</h4>
+                        <span class="progress-percentage" id="sscpw3-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="sscpw3-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('sscp', 3, this)"><input type="checkbox" class="week-check sscpw3-check"><span>Operations</span></label>
+                        <label class="progress-item" onclick="trackWeek('sscp', 3, this)"><input type="checkbox" class="week-check sscpw3-check"><span>Incident response</span></label>
+                        <label class="progress-item" onclick="trackWeek('sscp', 3, this)"><input type="checkbox" class="week-check sscpw3-check"><span>Examen ≥70%</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="global-progress">
+                <h4>📈 Progression SSCP</h4>
+                <div class="progress-bar"><div class="progress-fill" id="sscp-global-fill"></div></div>
+                <p><span id="sscp-global-count">0</span> / <span id="sscp-global-total">9</span> (<span id="sscp-global-percent">0%</span>)</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Ressources SSCP</h2>
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(this, 'sscp-cours')">Cours</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sscp-pratique')">Pratique</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sscp-ressources')">Ressources</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sscp-labs')">🔗 Labs GitHub</button>
+            </div>
+            <div class="tab-content active" id="sscp-cours">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">ISC² Official Study Guide</div><div class="resource-link">isc2.org • ~$70</div><div class="resource-desc">Guide officiel ISC²</div></div>
+                    <div class="resource-card"><div class="resource-title">Udemy SSCP</div><div class="resource-link">udemy.com • ~$15</div><div class="resource-desc">Cours complet</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sscp-pratique">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Boson SSCP Exams</div><div class="resource-link">boson.com • ~$150</div><div class="resource-desc">Tests très réalistes</div></div>
+                    <div class="resource-card"><div class="resource-title">ISC² Practice Exams</div><div class="resource-link">isc2.org • Payant</div><div class="resource-desc">Questions officielles</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sscp-ressources">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">TryHackMe Security</div><div class="resource-link">tryhackme.com • Premium</div><div class="resource-desc">Labs interactifs</div></div>
+                    <div class="resource-card"><div class="resource-title">HackTheBox</div><div class="resource-link">hackthebox.com • Gratuit+</div><div class="resource-desc">Challenges pratiques</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sscp-labs">
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 SSCP Study Guide</div>
+                        <div class="resource-link">github.com/imran-patel/SSCP-Study-Guide</div>
+                        <div class="resource-desc">Guide d'étude complet</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 SSCP Notes</div>
+                        <div class="resource-link">github.com/jamisin/sscp-notes</div>
+                        <div class="resource-desc">Notes détaillées</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Payloads All The Things</div>
+                        <div class="resource-link">github.com/PayloadAllTheThings/PayloadsAllTheThings</div>
+                        <div class="resource-desc">Ressources pratiques et techniques</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SC-200 -->
+    <div id="sc200" class="content">
+        <header>
+            <div class="order-badge">ÉTAPE 5/9</div>
+            <h1>🔵 SC-200 (Security Operations Analyst)</h1>
+            <p class="subtitle">Analyste Opérations Sécurité Microsoft</p>
+            <p class="meta">6-8 semaines • Intermédiaire-Avancé</p>
+            <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <p style="color: #1565c0; font-style: italic; font-weight: 600; margin: 0; margin-bottom: 0.75rem;">💡 "Microsoft Sentinel ne surveille que si quelqu'un de compétent le pilote. Devenez ce pilote."</p>
+                <p style="color: #1565c0; font-style: italic; font-weight: 600; margin: 0;">💡 "SC-200 est la clé pour les entreprises Microsoft. Devenez indispensable."</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">📚 Domaines Couverts</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Microsoft Defender (35%)</li>
+                        <li>✓ Microsoft Sentinel SIEM (30%)</li>
+                        <li>✓ Microsoft 365 Defender (25%)</li>
+                        <li>✓ Security Operations Maintenance (10%)</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💼 Postes Possibles</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Microsoft SOC Analyst</li>
+                        <li>✓ Azure Security Operations</li>
+                        <li>✓ Threat Detection Analyst</li>
+                        <li>✓ Cloud Security Operations Manager</li>
+                        <li>✓ Security Incident Response Specialist</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💰 Salaires au Québec</h4>
+                    <p style="color: #4472C4; font-weight: 700; font-size: 16px; margin: 0.5rem 0;">$85,000 - $125,000 CAD</p>
+                    <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Niveau: Intermédiaire-Avancé • Expérience: 3-7 ans</p>
+                </div>
+            </div>
+        </header>
+        <div class="section">
+            <h2>📋 Plan d'Étude</h2>
+            <div class="overview">
+                <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">Domaines</div></div>
+                <div class="stat-card"><div class="stat-number">25h</div><div class="stat-label">/semaine</div></div>
+                <div class="stat-card"><div class="stat-number">≥70%</div><div class="stat-label">Score</div></div>
+                <div class="stat-card"><div class="stat-number">$100-140K</div><div class="stat-label">Salaire</div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Suivi Progression SC-200</h2>
+            <div class="progress-grid">
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S1-2: Defender</h4>
+                        <span class="progress-percentage" id="sc200w1-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="sc200w1-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('sc200', 1, this)"><input type="checkbox" class="week-check sc200w1-check"><span>Microsoft Defender</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc200', 1, this)"><input type="checkbox" class="week-check sc200w1-check"><span>Endpoint protection</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc200', 1, this)"><input type="checkbox" class="week-check sc200w1-check"><span>Labs Microsoft</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S3-4: Sentinel</h4>
+                        <span class="progress-percentage" id="sc200w2-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="sc200w2-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('sc200', 2, this)"><input type="checkbox" class="week-check sc200w2-check"><span>Sentinel SIEM</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc200', 2, this)"><input type="checkbox" class="week-check sc200w2-check"><span>KQL queries</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc200', 2, this)"><input type="checkbox" class="week-check sc200w2-check"><span>Investigation</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S5-6: Response</h4>
+                        <span class="progress-percentage" id="sc200w3-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="sc200w3-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('sc200', 3, this)"><input type="checkbox" class="week-check sc200w3-check"><span>Threat response</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc200', 3, this)"><input type="checkbox" class="week-check sc200w3-check"><span>365 Defender</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc200', 3, this)"><input type="checkbox" class="week-check sc200w3-check"><span>Examen ≥70%</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="global-progress">
+                <h4>📈 Progression SC-200</h4>
+                <div class="progress-bar"><div class="progress-fill" id="sc200-global-fill"></div></div>
+                <p><span id="sc200-global-count">0</span> / <span id="sc200-global-total">9</span> (<span id="sc200-global-percent">0%</span>)</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Ressources SC-200</h2>
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(this, 'sc200-cours')">Cours</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sc200-pratique')">Pratique</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sc200-ressources')">Ressources</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sc200-labs')">🔗 Labs GitHub</button>
+            </div>
+            <div class="tab-content active" id="sc200-cours">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Microsoft Learn SC-200</div><div class="resource-link">microsoft.com/learn • GRATUIT</div><div class="resource-desc">Parcours officiel Microsoft</div></div>
+                    <div class="resource-card"><div class="resource-title">Pluralsight SC-200</div><div class="resource-link">pluralsight.com • Premium</div><div class="resource-desc">Cours vidéo complets</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sc200-pratique">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Microsoft Practice Exams</div><div class="resource-link">microsoft.com • GRATUIT</div><div class="resource-desc">Questions officielles</div></div>
+                    <div class="resource-card"><div class="resource-title">Sentinel Free Trial</div><div class="resource-link">azure.microsoft.com • GRATUIT 30j</div><div class="resource-desc">Environnement pratique</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sc200-ressources">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Microsoft Defender Docs</div><div class="resource-link">docs.microsoft.com • GRATUIT</div><div class="resource-desc">Documentation complète</div></div>
+                    <div class="resource-card"><div class="resource-title">Sentinel GitHub</div><div class="resource-link">github.com/Azure/Azure-Sentinel • GRATUIT</div><div class="resource-desc">Playbooks et détections</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sc200-labs">
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 SC-200 Microsoft Learning</div>
+                        <div class="resource-link">github.com/MicrosoftLearning/SC-200T00</div>
+                        <div class="resource-desc">Labs officiels Microsoft</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Microsoft Defender TI</div>
+                        <div class="resource-link">github.com/microsoft/Microsoft-Defender-Threat-Intelligence</div>
+                        <div class="resource-desc">Threat Intelligence resources</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Azure Sentinel</div>
+                        <div class="resource-link">github.com/Azure/Azure-Sentinel</div>
+                        <div class="resource-desc">Community playbooks et détections</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SC-401 -->
+    <div id="sc401" class="content">
+        <header>
+            <div class="order-badge">ÉTAPE 6/9</div>
+            <h1>🟣 SC-401 (Information Protection Administrator)</h1>
+            <p class="subtitle">Administrateur Protection Information</p>
+            <p class="meta">6-8 semaines • Avancé</p>
+            <div style="background: #f3e5f5; border-left: 4px solid #7b1fa2; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <p style="color: #4a148c; font-style: italic; font-weight: 600; margin: 0; margin-bottom: 0.75rem;">💡 "Protéger l'information est un art. Maîtrisez-le et devenez indispensable."</p>
+                <p style="color: #4a148c; font-style: italic; font-weight: 600; margin: 0;">💡 "SC-401 est rare, prestigieux et très demandé. Soyez celui qui l'a."</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">📚 Domaines Couverts</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Information Protection Implementation (35%)</li>
+                        <li>✓ Data Loss Prevention Management (30%)</li>
+                        <li>✓ Information Governance (20%)</li>
+                        <li>✓ Insider Risk Management (15%)</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💼 Postes Possibles</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Information Protection Administrator</li>
+                        <li>✓ Data Governance Officer</li>
+                        <li>✓ DLP Specialist</li>
+                        <li>✓ Compliance & Data Protection Manager</li>
+                        <li>✓ Privacy & Security Officer</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💰 Salaires au Québec</h4>
+                    <p style="color: #4472C4; font-weight: 700; font-size: 16px; margin: 0.5rem 0;">$90,000 - $135,000 CAD</p>
+                    <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Niveau: Avancé • Expérience: 4-8 ans</p>
+                </div>
+            </div>
+        </header>
+        <div class="section">
+            <h2>📊 Suivi Progression SC-401</h2>
+            <div class="progress-grid">
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S1-2: Labels & DLP</h4>
+                        <span class="progress-percentage" id="sc401w1-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="sc401w1-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('sc401', 1, this)"><input type="checkbox" class="week-check sc401w1-check"><span>Information labels</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc401', 1, this)"><input type="checkbox" class="week-check sc401w1-check"><span>DLP policies</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc401', 1, this)"><input type="checkbox" class="week-check sc401w1-check"><span>RMS encryption</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S3-4: Governance</h4>
+                        <span class="progress-percentage" id="sc401w2-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="sc401w2-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('sc401', 2, this)"><input type="checkbox" class="week-check sc401w2-check"><span>Records mgmt</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc401', 2, this)"><input type="checkbox" class="week-check sc401w2-check"><span>Retention</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc401', 2, this)"><input type="checkbox" class="week-check sc401w2-check"><span>Compliance</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S5-6: Insider Risk</h4>
+                        <span class="progress-percentage" id="sc401w3-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="sc401w3-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('sc401', 3, this)"><input type="checkbox" class="week-check sc401w3-check"><span>Risk policies</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc401', 3, this)"><input type="checkbox" class="week-check sc401w3-check"><span>Communication</span></label>
+                        <label class="progress-item" onclick="trackWeek('sc401', 3, this)"><input type="checkbox" class="week-check sc401w3-check"><span>Examen ≥70%</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="global-progress">
+                <h4>📈 Progression SC-401</h4>
+                <div class="progress-bar"><div class="progress-fill" id="sc401-global-fill"></div></div>
+                <p><span id="sc401-global-count">0</span> / <span id="sc401-global-total">9</span> (<span id="sc401-global-percent">0%</span>)</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Ressources SC-401</h2>
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(this, 'sc401-cours')">Cours</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sc401-pratique')">Pratique</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sc401-ressources')">Ressources</button>
+                <button class="tab-btn" onclick="switchTab(this, 'sc401-labs')">🔗 Labs GitHub</button>
+            </div>
+            <div class="tab-content active" id="sc401-cours">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Microsoft Learn SC-401</div><div class="resource-link">microsoft.com/learn • GRATUIT</div><div class="resource-desc">Parcours officiel Microsoft</div></div>
+                    <div class="resource-card"><div class="resource-title">Udemy SC-401</div><div class="resource-link">udemy.com • ~$15</div><div class="resource-desc">Cours complet</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sc401-pratique">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Microsoft Practice Exams</div><div class="resource-link">microsoft.com • GRATUIT</div><div class="resource-desc">Questions officielles</div></div>
+                    <div class="resource-card"><div class="resource-title">Compliance Center Sandbox</div><div class="resource-link">microsoft.com • GRATUIT</div><div class="resource-desc">Environnement d'apprentissage</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sc401-ressources">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">M365 Compliance Docs</div><div class="resource-link">docs.microsoft.com • GRATUIT</div><div class="resource-desc">Documentation complète</div></div>
+                    <div class="resource-card"><div class="resource-title">Microsoft Purview</div><div class="resource-link">microsoft.com/purview • GRATUIT</div><div class="resource-desc">Plateforme de conformité</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="sc401-labs">
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 SC-401 Microsoft Learning</div>
+                        <div class="resource-link">github.com/MicrosoftLearning/SC-400T00</div>
+                        <div class="resource-desc">Labs officiels Microsoft</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Microsoft Information Protection</div>
+                        <div class="resource-link">github.com/Azure/Microsoft-Information-Protection</div>
+                        <div class="resource-desc">DLP et protection d'information</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 M365 Defender Hunting</div>
+                        <div class="resource-link">github.com/microsoft/Microsoft-365-Defender-Hunting-Queries</div>
+                        <div class="resource-desc">Hunting queries et détections</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ITIL -->
+    <div id="itil" class="content">
+        <header>
+            <div class="order-badge">ÉTAPE 7/9</div>
+            <h1>⚙️ ITIL v4 (IT Service Management)</h1>
+            <p class="subtitle">Praticien Gestion Services IT</p>
+            <p class="meta">6 semaines • Intermédiaire</p>
+            <div style="background: #fff3e0; border-left: 4px solid #ff6f00; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <p style="color: #e65100; font-style: italic; font-weight: 600; margin: 0; margin-bottom: 0.75rem;">💡 "Les services IT qui font la différence sont ceux gérés par des praticiens ITIL certifiés."</p>
+                <p style="color: #e65100; font-style: italic; font-weight: 600; margin: 0;">💡 "ITIL v4 n'est pas une certification, c'est une philosophie de gestion. Adoptez-la."</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">📚 Domaines Couverts</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Service Value System</li>
+                        <li>✓ 4 Dimensions ITIL</li>
+                        <li>✓ 34+ Management Practices</li>
+                        <li>✓ Continual Improvement</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💼 Postes Possibles</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ ITIL Service Manager</li>
+                        <li>✓ IT Operations Manager</li>
+                        <li>✓ Incident Manager</li>
+                        <li>✓ Change Manager</li>
+                        <li>✓ Service Delivery Manager</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💰 Salaires au Québec</h4>
+                    <p style="color: #4472C4; font-weight: 700; font-size: 16px; margin: 0.5rem 0;">$75,000 - $110,000 CAD</p>
+                    <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Niveau: Intermédiaire • Expérience: 2-5 ans</p>
+                </div>
+            </div>
+        </header>
+        <div class="section">
+            <h2>📊 Suivi Progression ITIL</h2>
+            <div class="progress-grid">
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S1: Foundation</h4>
+                        <span class="progress-percentage" id="itilw1-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="itilw1-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('itil', 1, this)"><input type="checkbox" class="week-check itilw1-check"><span>Core concepts</span></label>
+                        <label class="progress-item" onclick="trackWeek('itil', 1, this)"><input type="checkbox" class="week-check itilw1-check"><span>Service principles</span></label>
+                        <label class="progress-item" onclick="trackWeek('itil', 1, this)"><input type="checkbox" class="week-check itilw1-check"><span>Foundation exam</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S2-3: Practitioner</h4>
+                        <span class="progress-percentage" id="itilw2-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="itilw2-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('itil', 2, this)"><input type="checkbox" class="week-check itilw2-check"><span>SVS & Dimensions</span></label>
+                        <label class="progress-item" onclick="trackWeek('itil', 2, this)"><input type="checkbox" class="week-check itilw2-check"><span>Practices</span></label>
+                        <label class="progress-item" onclick="trackWeek('itil', 2, this)"><input type="checkbox" class="week-check itilw2-check"><span>Case studies</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S4-6: Exam</h4>
+                        <span class="progress-percentage" id="itilw3-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="itilw3-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('itil', 3, this)"><input type="checkbox" class="week-check itilw3-check"><span>Scenario practices</span></label>
+                        <label class="progress-item" onclick="trackWeek('itil', 3, this)"><input type="checkbox" class="week-check itilw3-check"><span>Mock exams</span></label>
+                        <label class="progress-item" onclick="trackWeek('itil', 3, this)"><input type="checkbox" class="week-check itilw3-check"><span>Practitioner ≥65%</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="global-progress">
+                <h4>📈 Progression ITIL</h4>
+                <div class="progress-bar"><div class="progress-fill" id="itil-global-fill"></div></div>
+                <p><span id="itil-global-count">0</span> / <span id="itil-global-total">9</span> (<span id="itil-global-percent">0%</span>)</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Ressources ITIL v4</h2>
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(this, 'itil-cours')">Cours</button>
+                <button class="tab-btn" onclick="switchTab(this, 'itil-pratique')">Pratique</button>
+                <button class="tab-btn" onclick="switchTab(this, 'itil-ressources')">Ressources</button>
+                <button class="tab-btn" onclick="switchTab(this, 'itil-labs')">🔗 Labs GitHub</button>
+            </div>
+            <div class="tab-content active" id="itil-cours">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">AXELOS ITIL 4</div><div class="resource-link">axelos.com • ~$400</div><div class="resource-desc">Formation officielle AXELOS</div></div>
+                    <div class="resource-card"><div class="resource-title">Udemy ITIL v4</div><div class="resource-link">udemy.com • ~$15</div><div class="resource-desc">Cours complet et pratique</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="itil-pratique">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Boson ITIL Exams</div><div class="resource-link">boson.com • ~$100</div><div class="resource-desc">Examens pratiques réalistes</div></div>
+                    <div class="resource-card"><div class="resource-title">AXELOS Practice Exams</div><div class="resource-link">axelos.com • Payant</div><div class="resource-desc">Tests officiels</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="itil-ressources">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">ITIL 4 Handbook</div><div class="resource-link">axelos.com • ~$40</div><div class="resource-desc">Handbook officiel</div></div>
+                    <div class="resource-card"><div class="resource-title">ITIL Official Glossary</div><div class="resource-link">axelos.com • GRATUIT</div><div class="resource-desc">Glossaire complet</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="itil-labs">
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 ITIL 4 Handbook</div>
+                        <div class="resource-link">github.com/axelos/ITIL-4-Foundation-Handbook</div>
+                        <div class="resource-desc">Handbook officiel AXELOS</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 ITIL 4 Study Guide</div>
+                        <div class="resource-link">github.com/ricardofloriano/itil4-study-guide</div>
+                        <div class="resource-desc">Guide d'étude détaillé</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 SonarQube ITIL Example</div>
+                        <div class="resource-link">github.com/SonarSource/SonarQube</div>
+                        <div class="resource-desc">Exemple de service IT moderne</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CISA -->
+    <div id="cisa" class="content">
+        <header>
+            <div class="order-badge">ÉTAPE 8/9</div>
+            <h1>📊 CISA (Certified Information Systems Auditor)</h1>
+            <p class="subtitle">Auditeur IT & Gouvernance</p>
+            <p class="meta">8 semaines • Avancé • 5 ans d'expérience REQUIS</p>
+            <div style="background: #e8f5e9; border-left: 4px solid #388e3c; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <p style="color: #1b5e20; font-style: italic; font-weight: 600; margin: 0; margin-bottom: 0.75rem;">💡 "L'audit IT n'est pas une corvée, c'est le pouvoir de transformer. Soyez cette force."</p>
+                <p style="color: #1b5e20; font-style: italic; font-weight: 600; margin: 0;">💡 "CISA ouvre les portes de la gouvernance. Vous êtes presque au sommet."</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">📚 Domaines Couverts</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Governance & Risk Management (20%)</li>
+                        <li>✓ Systems Acquisition (25%)</li>
+                        <li>✓ IT Service Delivery (25%)</li>
+                        <li>✓ IT Security (15%)</li>
+                        <li>✓ IT Audit Management (15%)</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💼 Postes Possibles</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Internal IT Auditor</li>
+                        <li>✓ IT Governance Manager</li>
+                        <li>✓ Compliance Officer</li>
+                        <li>✓ Risk Manager</li>
+                        <li>✓ IT Audit Director</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💰 Salaires au Québec</h4>
+                    <p style="color: #4472C4; font-weight: 700; font-size: 16px; margin: 0.5rem 0;">$100,000 - $150,000 CAD</p>
+                    <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Niveau: Avancé • Expérience: 5+ ans</p>
+                </div>
+            </div>
+        </header>
+        <div class="section">
+            <h2>📊 Suivi Progression CISA</h2>
+            <div class="progress-grid">
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S1-2: Governance</h4>
+                        <span class="progress-percentage" id="cisaw1-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="cisaw1-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('cisa', 1, this)"><input type="checkbox" class="week-check cisaw1-check"><span>IT Governance</span></label>
+                        <label class="progress-item" onclick="trackWeek('cisa', 1, this)"><input type="checkbox" class="week-check cisaw1-check"><span>Risk management</span></label>
+                        <label class="progress-item" onclick="trackWeek('cisa', 1, this)"><input type="checkbox" class="week-check cisaw1-check"><span>COBIT framework</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S3-4: Systems</h4>
+                        <span class="progress-percentage" id="cisaw2-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="cisaw2-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('cisa', 2, this)"><input type="checkbox" class="week-check cisaw2-check"><span>SDLC security</span></label>
+                        <label class="progress-item" onclick="trackWeek('cisa', 2, this)"><input type="checkbox" class="week-check cisaw2-check"><span>Development</span></label>
+                        <label class="progress-item" onclick="trackWeek('cisa', 2, this)"><input type="checkbox" class="week-check cisaw2-check"><span>Project controls</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S5-8: Final</h4>
+                        <span class="progress-percentage" id="cisaw3-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="cisaw3-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('cisa', 3, this)"><input type="checkbox" class="week-check cisaw3-check"><span>Operations</span></label>
+                        <label class="progress-item" onclick="trackWeek('cisa', 3, this)"><input type="checkbox" class="week-check cisaw3-check"><span>Security & Audit</span></label>
+                        <label class="progress-item" onclick="trackWeek('cisa', 3, this)"><input type="checkbox" class="week-check cisaw3-check"><span>Examen ≥70%</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="global-progress">
+                <h4>📈 Progression CISA</h4>
+                <div class="progress-bar"><div class="progress-fill" id="cisa-global-fill"></div></div>
+                <p><span id="cisa-global-count">0</span> / <span id="cisa-global-total">9</span> (<span id="cisa-global-percent">0%</span>)</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Ressources CISA</h2>
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(this, 'cisa-cours')">Cours</button>
+                <button class="tab-btn" onclick="switchTab(this, 'cisa-pratique')">Pratique</button>
+                <button class="tab-btn" onclick="switchTab(this, 'cisa-ressources')">Ressources</button>
+                <button class="tab-btn" onclick="switchTab(this, 'cisa-labs')">🔗 Labs GitHub</button>
+            </div>
+            <div class="tab-content active" id="cisa-cours">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">CISA Review Manual</div><div class="resource-link">isaca.org • ~$80</div><div class="resource-desc">Manuel officiel ISACA</div></div>
+                    <div class="resource-card"><div class="resource-title">Udemy CISA</div><div class="resource-link">udemy.com • ~$15</div><div class="resource-desc">Cours complet</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="cisa-pratique">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Boson CISA Exams</div><div class="resource-link">boson.com • ~$150</div><div class="resource-desc">Tests très réalistes</div></div>
+                    <div class="resource-card"><div class="resource-title">ISACA Practice Exams</div><div class="resource-link">isaca.org • Payant</div><div class="resource-desc">Questions officielles</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="cisa-ressources">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">COBIT 2019 Framework</div><div class="resource-link">isaca.org • Payant</div><div class="resource-desc">Framework de gouvernance</div></div>
+                    <div class="resource-card"><div class="resource-title">CISA Glossary</div><div class="resource-link">isaca.org • GRATUIT</div><div class="resource-desc">Glossaire complet</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="cisa-labs">
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 CISA Study Guide</div>
+                        <div class="resource-link">github.com/imran-patel/CISA-Study-Guide</div>
+                        <div class="resource-desc">Guide d'étude complet</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 CISA Notes</div>
+                        <div class="resource-link">github.com/jamisin/cisa-notes</div>
+                        <div class="resource-desc">Notes détaillées et organisées</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 ISACA Resources</div>
+                        <div class="resource-link">github.com/ISACA/CISA-resources</div>
+                        <div class="resource-desc">Ressources officielles ISACA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CISSP -->
+    <div id="cissp" class="content">
+        <header>
+            <div class="order-badge">ÉTAPE 9/9</div>
+            <h1>🛡️ CISSP (Certified Information Systems Security Professional)</h1>
+            <p class="subtitle">Expert Sécurité Stratégique - LE GRAAL</p>
+            <p class="meta">8 semaines • Expert • 5 ans d'expérience REQUIS</p>
+            <div style="background: #fce4ec; border-left: 4px solid #c2185b; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <p style="color: #880e4f; font-style: italic; font-weight: 600; margin: 0; margin-bottom: 0.75rem;">💡 "CISSP n'est pas un certificat, c'est une reconnaissance d'expertise. C'est votre apothéose."</p>
+                <p style="color: #880e4f; font-style: italic; font-weight: 600; margin: 0;">💡 "Le monde a besoin de CISSP. Soyez celui qui change les jeux."</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">📚 Domaines Couverts</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Security & Risk Management (18%)</li>
+                        <li>✓ Asset Security (16%)</li>
+                        <li>✓ Architecture & Design (12%)</li>
+                        <li>✓ Communication & Network Security (12%)</li>
+                        <li>✓ Identity & Access Management (16%)</li>
+                        <li>✓ Security Assessment & Testing (10%)</li>
+                        <li>✓ Security Operations (10%)</li>
+                        <li>✓ SDLC Security (6%)</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💼 Postes Possibles</h4>
+                    <ul style="list-style: none; padding: 0; color: #555; font-size: 14px;">
+                        <li>✓ Chief Information Security Officer (CISO)</li>
+                        <li>✓ Security Director</li>
+                        <li>✓ Enterprise Security Architect</li>
+                        <li>✓ Security Consultant (Big 4)</li>
+                        <li>✓ VP of Security</li>
+                        <li>✓ Chief Risk Officer (CRO)</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border-left: 4px solid #70AD47;">
+                    <h4 style="color: #2c3e50; margin-bottom: 0.75rem;">💰 Salaires au Québec</h4>
+                    <p style="color: #4472C4; font-weight: 700; font-size: 16px; margin: 0.5rem 0;">$120,000 - $200,000+ CAD</p>
+                    <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Niveau: Expert • Expérience: 5+ ans • Leadership requis</p>
+                </div>
+            </div>
+        </header>
+        <div class="section">
+            <h2>📊 Suivi Progression CISSP</h2>
+            <div class="progress-grid">
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S1-2: Security & Risk</h4>
+                        <span class="progress-percentage" id="cisspp1-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="cisspp1-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('cissp', 1, this)"><input type="checkbox" class="week-check cisspp1-check"><span>Security governance</span></label>
+                        <label class="progress-item" onclick="trackWeek('cissp', 1, this)"><input type="checkbox" class="week-check cisspp1-check"><span>Risk management</span></label>
+                        <label class="progress-item" onclick="trackWeek('cissp', 1, this)"><input type="checkbox" class="week-check cisspp1-check"><span>Compliance</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S3-4: Architecture</h4>
+                        <span class="progress-percentage" id="cisspp2-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="cisspp2-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('cissp', 2, this)"><input type="checkbox" class="week-check cisspp2-check"><span>Security design</span></label>
+                        <label class="progress-item" onclick="trackWeek('cissp', 2, this)"><input type="checkbox" class="week-check cisspp2-check"><span>Asset security</span></label>
+                        <label class="progress-item" onclick="trackWeek('cissp', 2, this)"><input type="checkbox" class="week-check cisspp2-check"><span>Network security</span></label>
+                    </div>
+                </div>
+
+                <div class="week-progress-card">
+                    <div class="progress-header">
+                        <h4>S5-8: Operations</h4>
+                        <span class="progress-percentage" id="cisspp3-percent">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="cisspp3-fill"></div></div>
+                    <div class="progress-items">
+                        <label class="progress-item" onclick="trackWeek('cissp', 3, this)"><input type="checkbox" class="week-check cisspp3-check"><span>IAM & Assessment</span></label>
+                        <label class="progress-item" onclick="trackWeek('cissp', 3, this)"><input type="checkbox" class="week-check cisspp3-check"><span>Operations & SDLC</span></label>
+                        <label class="progress-item" onclick="trackWeek('cissp', 3, this)"><input type="checkbox" class="week-check cisspp3-check"><span>Examen ≥70%</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="global-progress">
+                <h4>📈 Progression CISSP</h4>
+                <div class="progress-bar"><div class="progress-fill" id="cissp-global-fill"></div></div>
+                <p><span id="cissp-global-count">0</span> / <span id="cissp-global-total">9</span> (<span id="cissp-global-percent">0%</span>)</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Ressources CISSP</h2>
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(this, 'cissp-cours')">Cours</button>
+                <button class="tab-btn" onclick="switchTab(this, 'cissp-pratique')">Pratique</button>
+                <button class="tab-btn" onclick="switchTab(this, 'cissp-ressources')">Ressources</button>
+                <button class="tab-btn" onclick="switchTab(this, 'cissp-labs')">🔗 Labs GitHub</button>
+            </div>
+            <div class="tab-content active" id="cissp-cours">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">CISSP Official Guide</div><div class="resource-link">isc2.org • ~$70</div><div class="resource-desc">Guide officiel ISC²</div></div>
+                    <div class="resource-card"><div class="resource-title">Laurie Rohig Udemy</div><div class="resource-link">udemy.com • ~$50</div><div class="resource-desc">Meilleur cours Udemy</div></div>
+                    <div class="resource-card"><div class="resource-title">Pluralsight CISSP</div><div class="resource-link">pluralsight.com • Premium</div><div class="resource-desc">Cours vidéo complets</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="cissp-pratique">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">Boson CISSP Exams</div><div class="resource-link">boson.com • ~$150</div><div class="resource-desc">Les meilleurs tests pratiques</div></div>
+                    <div class="resource-card"><div class="resource-title">ISC² Practice Exams</div><div class="resource-link">isc2.org • Payant</div><div class="resource-desc">Questions officielles</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="cissp-ressources">
+                <div class="resource-grid">
+                    <div class="resource-card"><div class="resource-title">CISSP CBK Knowledge Base</div><div class="resource-link">isc2.org • GRATUIT</div><div class="resource-desc">Base de connaissances officielle</div></div>
+                    <div class="resource-card"><div class="resource-title">NIST Standards</div><div class="resource-link">nist.gov • GRATUIT</div><div class="resource-desc">Frameworks et standards</div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="cissp-labs">
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 CISSP Study Guide</div>
+                        <div class="resource-link">github.com/imran-patel/CISSP-Study-Guide</div>
+                        <div class="resource-desc">Guide d'étude complet des 8 domaines</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 CISSP Notes</div>
+                        <div class="resource-link">github.com/jamisin/cissp-notes</div>
+                        <div class="resource-desc">Notes détaillées et bien organisées</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">🔗 Awesome CISSP</div>
+                        <div class="resource-link">github.com/0xDarkKnight/awesome-cissp</div>
+                        <div class="resource-desc">Collection de ressources CISSP</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONSEILS POUR RÉUSSIR -->
+    <div class="section">
+        <h2>💡 Conseils pour Réussir cette Roadmap</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            <div style="background: #f0f7ff; border-left: 4px solid #2196f3; padding: 1.5rem; border-radius: 8px;">
+                <h4 style="color: #1565c0; margin-bottom: 1rem;">⏰ Gestion du Temps</h4>
+                <ul style="list-style: none; padding: 0; color: #555; font-size: 14px; line-height: 1.8;">
+                    <li>✓ Investissez 20-25 heures/semaine minimum</li>
+                    <li>✓ Fixez des heures régulières (même horaire chaque jour)</li>
+                    <li>✓ Prenez des pauses de 10 min toutes les heures</li>
+                    <li>✓ Pratiquez les labs 30% du temps, théorie 70%</li>
+                </ul>
+            </div>
+
+            <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 1.5rem; border-radius: 8px;">
+                <h4 style="color: #e65100; margin-bottom: 1rem;">🎯 Stratégie d'Étude</h4>
+                <ul style="list-style: none; padding: 0; color: #555; font-size: 14px; line-height: 1.8;">
+                    <li>✓ Maîtrisez une certification avant de passer à la suivante</li>
+                    <li>✓ Utilisez les repos GitHub comme référence quotidienne</li>
+                    <li>✓ Prenez des notes pendant que vous apprenez</li>
+                    <li>✓ Rejoignez des communautés en ligne (Reddit, Discord)</li>
+                </ul>
+            </div>
+
+            <div style="background: #e8f5e9; border-left: 4px solid #70AD47; padding: 1.5rem; border-radius: 8px;">
+                <h4 style="color: #2e7d32; margin-bottom: 1rem;">🔄 Pratique et Répétition</h4>
+                <ul style="list-style: none; padding: 0; color: #555; font-size: 14px; line-height: 1.8;">
+                    <li>✓ Faites des examens blancs 2 semaines avant l'examen</li>
+                    <li>✓ Visez minimum 80% aux examens pratiques</li>
+                    <li>✓ Relevez chaque erreur et révisez ces sujets</li>
+                    <li>✓ Pratiquez avec les vraies conditions d'examen</li>
+                </ul>
+            </div>
+
+            <div style="background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 1.5rem; border-radius: 8px;">
+                <h4 style="color: #6a1b9a; margin-bottom: 1rem;">💪 Motivation et Discipline</h4>
+                <ul style="list-style: none; padding: 0; color: #555; font-size: 14px; line-height: 1.8;">
+                    <li>✓ Célébrez chaque certification obtenue</li>
+                    <li>✓ Visualisez-vous en tant que CISO avant de terminer</li>
+                    <li>✓ Trouvez un partenaire d'études pour l'accountability</li>
+                    <li>✓ N'abandonnez pas - chaque expert a dû persévérer</li>
+                </ul>
+            </div>
+
+            <div style="background: #fce4ec; border-left: 4px solid #c2185b; padding: 1.5rem; border-radius: 8px;">
+                <h4 style="color: #880e4f; margin-bottom: 1rem;">📈 Progression Professionnelle</h4>
+                <ul style="list-style: none; padding: 0; color: #555; font-size: 14px; line-height: 1.8;">
+                    <li>✓ Mettez à jour votre CV après chaque cert</li>
+                    <li>✓ Appliquez aux nouveaux postes dès certification</li>
+                    <li>✓ Demandez une augmentation salaire après chaque cert</li>
+                    <li>✓ Documentez vos apprentissages sur LinkedIn</li>
+                </ul>
+            </div>
+
+            <div style="background: #e0f2f1; border-left: 4px solid #009688; padding: 1.5rem; border-radius: 8px;">
+                <h4 style="color: #00695c; margin-bottom: 1rem;">🚨 Pièges à Éviter</h4>
+                <ul style="list-style: none; padding: 0; color: #555; font-size: 14px; line-height: 1.8;">
+                    <li>✓ Ne sautez PAS les domaines "ennuyeux"</li>
+                    <li>✓ Ne vous fiez pas qu'aux examens blancs</li>
+                    <li>✓ Ne vous précipitez pas avant d'être prêt</li>
+                    <li>✓ Ne comparez pas votre parcours aux autres</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <p>🎓 Votre Roadmap Complète: 9 Certifications + Système de Checklist Interactif</p>
+        <p>✅ Vos progrès sont sauvegardés automatiquement dans votre navigateur</p>
+        <p style="margin-top: 1rem; font-size: 12px; color: #95a5a6;">Mise à jour: 23 mars 2026 • AZ-900 → Security+ → CySA+ → SSCP → SC-200 → SC-401 → ITIL → CISA → CISSP</p>
+    </footer>
+</div>
+
+<script>
+function showCert(event, certId) {
+    document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.cert-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(certId).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+function switchTab(btn, tabId) {
+    const parent = btn.closest('.section');
+    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    parent.querySelector('#' + tabId).classList.add('active');
+}
+
+function toggleChecklist(item) {
+    item.classList.toggle('checked');
+    const checkbox = item.querySelector('input[type="checkbox"]');
+    if (checkbox) {
+        checkbox.checked = item.classList.contains('checked');
+    }
+    updateGlobalProgress();
+    saveProgress();
+}
+
+function trackWeek(cert, week, element) {
+    const checkbox = element.querySelector('input[type="checkbox"]');
+    checkbox.checked = !checkbox.checked;
+    updateWeekProgress(cert, week);
+    updateGlobalProgress();
+    saveProgress();
+}
+
+function updateWeekProgress(cert, week) {
+    const classPrefix = `${cert}w${week}`;
+    const checks = document.querySelectorAll(`.${classPrefix}-check`);
+    const checked = Array.from(checks).filter(c => c.checked).length;
+    const percent = Math.round((checked / checks.length) * 100);
+    
+    document.getElementById(`${classPrefix}-percent`).textContent = percent + '%';
+    document.getElementById(`${classPrefix}-fill`).style.width = percent + '%';
+}
+
+function updateGlobalProgress() {
+    const certs = [
+        { name: 'az900', weeks: 3 },
+        { name: 'security', weeks: 3 },
+        { name: 'cysa', weeks: 3 },
+        { name: 'sscp', weeks: 3 },
+        { name: 'sc200', weeks: 3 },
+        { name: 'sc401', weeks: 3 },
+        { name: 'itil', weeks: 3 },
+        { name: 'cisa', weeks: 3 },
+        { name: 'cissp', weeks: 3 }
+    ];
+    
+    certs.forEach(cert => {
+        let totalChecks = 0;
+        let checkedCount = 0;
+        
+        // Compter les checkboxes pour chaque semaine
+        for (let w = 1; w <= cert.weeks; w++) {
+            const selector = `.${cert.name}w${w}-check`;
+            const weekChecks = document.querySelectorAll(selector);
+            weekChecks.forEach(check => {
+                totalChecks++;
+                if (check.checked) checkedCount++;
+            });
+        }
+        
+        const percent = totalChecks > 0 ? Math.round((checkedCount / totalChecks) * 100) : 0;
+        
+        const countElem = document.getElementById(`${cert.name}-global-count`);
+        if (countElem) {
+            countElem.textContent = checkedCount;
+            document.getElementById(`${cert.name}-global-total`).textContent = totalChecks;
+            document.getElementById(`${cert.name}-global-percent`).textContent = percent + '%';
+            document.getElementById(`${cert.name}-global-fill`).style.width = percent + '%';
+        }
+    });
+}
+
+function saveProgress() {
+    const allChecks = {};
+    let checkIdx = 0;
+    
+    // Sauvegarder par certification et semaine
+    const certs = ['az900', 'security', 'cysa', 'sscp', 'sc200', 'sc401', 'itil', 'cisa', 'cissp'];
+    certs.forEach(cert => {
+        for (let w = 1; w <= 3; w++) {
+            const selector = `.${cert}w${w}-check`;
+            const checks = document.querySelectorAll(selector);
+            checks.forEach((check, idx) => {
+                allChecks[`${cert}_w${w}_${idx}`] = check.checked;
+            });
+        }
+    });
+    
+    localStorage.setItem('certifications_progress', JSON.stringify(allChecks));
+}
+
+function loadProgress() {
+    const saved = localStorage.getItem('certifications_progress');
+    if (saved) {
+        const allChecks = JSON.parse(saved);
+        
+        // Charger par certification et semaine
+        const certs = ['az900', 'security', 'cysa', 'sscp', 'sc200', 'sc401', 'itil', 'cisa', 'cissp'];
+        certs.forEach(cert => {
+            for (let w = 1; w <= 3; w++) {
+                const selector = `.${cert}w${w}-check`;
+                const checks = document.querySelectorAll(selector);
+                checks.forEach((check, idx) => {
+                    if (allChecks[`${cert}_w${w}_${idx}`]) {
+                        check.checked = true;
+                        const item = check.closest('.progress-item') || check.closest('.checklist-item');
+                        if (item) item.classList.add('checked');
+                    }
+                });
+            }
+        });
+    }
+    updateGlobalProgress();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const weekHeaders = document.querySelectorAll('.week-header');
+    weekHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            this.closest('.week').classList.toggle('active');
+        });
+    });
+    
+    loadProgress();
+});
+</script>
+</body>
+</html>
